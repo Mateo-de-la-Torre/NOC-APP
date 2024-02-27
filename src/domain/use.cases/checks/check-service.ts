@@ -29,7 +29,13 @@ export class CheckService implements CheckServiceUseCase {
             }
 
             // Si la solicitud es exitosa
-            const log = new LogEntity( `Service ${url} working`, LogSeverityLevel.low ); // hace una instancia de LogEntity, con el menssage y el level 
+
+            const log = new LogEntity({ // hace una instancia de LogEntity, con el menssage, el level y el origin
+                message: `Service ${url} working`, 
+                level  : LogSeverityLevel.low, 
+                origin : 'check-service.ts'
+            });  
+
             this.logRepository.saveLog( log ) // guarda un log 
 
             this.successCallback && this.successCallback(); // llama al callback de éxito
@@ -40,7 +46,7 @@ export class CheckService implements CheckServiceUseCase {
 
             const errorMessage = `${url} is not ok. Error: ${ error }`;
 
-            const log = new LogEntity( errorMessage , LogSeverityLevel.high );
+            const log = new LogEntity({ message: errorMessage , level: LogSeverityLevel.high, origin: 'check-service' });
             this.logRepository.saveLog( log );
             
             this.errorCallback && this.errorCallback( errorMessage ); // Llama al callback de error pasando el mensaje de error
