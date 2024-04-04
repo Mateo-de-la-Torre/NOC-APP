@@ -61,6 +61,8 @@ export class FileSystemDatasource implements LogDatasource { // implementa la cl
     private getLogsFromFile = ( path: string ): LogEntity[] => { // ruta de archivo como argumento y devuelve un arreglo de instancias de LogEntity que representan los registros almacenados en ese archivo.
 
         const content = fs.readFileSync( path, 'utf-8'); // lee el contenido del archivo
+
+        if (content === '') return []; // si no hay contenido que devuelva un array vacio
         const logs = content.split('\n').map( // divide el contenido en líneas 
             log => LogEntity.fromJson(log) // mapea cada línea a una instancia de LogEntity
         );

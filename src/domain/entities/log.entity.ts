@@ -35,8 +35,10 @@ export class LogEntity { // clase que crea al log
     }
 
     // "{ "level": "high", "message": "Hola Mundo", "createdAt":"123456789"}"
-    static fromJson = ( json: string): LogEntity => { // crear una instancia de LogEntity a partir de una cadena JSON
+    // Para el FileSistem
+    static fromJson = ( json: string): LogEntity => { // crear una instancia de LogEntity a partir de una cadena JSON. Para el FileSistem
 
+        json = ( json === '' ) ? '{}': json; // si viene vacio que mande un obj vacio
        const { message, level, createdAt, origin } = JSON.parse(json); // convertir la cadena JSON en un objeto JavaScript
 
        const log = new LogEntity({ // crear una nueva instancia 
@@ -47,5 +49,17 @@ export class LogEntity { // clase que crea al log
         });
 
        return log; // devuelve la instancia creada
+    }
+
+    // PARA LA BD MONGO
+    static fromObject = (object: { [key: string]: any}): LogEntity => { // crear una instancia de LogEntity a partir de un objeto
+
+        const { message, level, createdAt, origin } = object
+
+        const log = new LogEntity({
+            message, level, createdAt, origin
+        });
+
+        return log;
     }
 }

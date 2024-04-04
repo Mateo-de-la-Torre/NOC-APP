@@ -26,7 +26,8 @@ MAILER_SERVICE=gmail
 PROD=false
 ```
 3. Ejecutar el comando ```npm install```
-4. Ejecutar ```npm run dev```
+4. Levantar las bases de datos con el comando ```docker compose up -d```
+5. Ejecutar ```npm run dev```
 
 
 ## Obtener Gmail Key
