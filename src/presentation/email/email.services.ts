@@ -4,17 +4,17 @@ import nodemailer from 'nodemailer';
 import { envs } from '../../config/plugins/envs.plugins';
 
 
-interface SendMailOptions {
+export interface SendMailOptions {
     to         : string | string[]; // a quien o a quienes les quiero mandar el correo
     subject    : string; // titulo del correo
     htmlBody   : string; // cuerpo del mail
     attachments?: Attachment[]; // archivo adjunto
 }
 
-    interface Attachment {
-        fileName: string;
-        path    : string;
-    }
+export interface Attachment {
+    fileName: string;
+    path    : string;
+}
 
 
 export class EmailService {// servicio para enviar correos electrónicos

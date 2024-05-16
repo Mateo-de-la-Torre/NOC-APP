@@ -45,7 +45,7 @@ export class LogEntity { // clase que crea al log
             message, 
             level, 
             origin,
-            createdAt,
+            createdAt: new Date(createdAt),
         });
 
        return log; // devuelve la instancia creada
